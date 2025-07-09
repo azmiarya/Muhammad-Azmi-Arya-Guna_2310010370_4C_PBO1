@@ -17,136 +17,17 @@ Berikut adalah bagian kode yang relevan dengan konsep OOP yang dijelaskan:
 
 bash
 public class Pegawai {
-    // enkapsulasi dan atribut
-    private String nama;
-    private String nip;
-    
-    // constructor
-    public Pegawai(String nama, String nip) {
-        this.nama = nama;
-        this.nip = nip;
-    }
-    
-    // mutator
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
 
-    public void setNip(String nip) {
-        this.nip = nip;
-    }
-    
-    // accessor
-    public String getNama() {
-        return nama;
-    }
-
-    public String getNip() {
-        return nip;
-    }
-    
-    // constructor biasa
-    public void tampilInfo() {
-        System.out.println("Nama            : " + nama);
-        System.out.println("NIP             : " + nip);
-    }
 }
 
 
 public class PegawaiDetail extends Pegawai {
-    // atribut tambahan untuk detail data pegawai
-    private String jenis;
-    private double gaji;
-    
-    // overriding
-    public PegawaiDetail(String nama, String nip, String jenis, double gaji) {
-        super(nama, nip);
-        this.jenis = jenis;
-        this.gaji = gaji;
-    }
-    
-    // accessor
-    public String getJenis() {
-        return jenis;
-    }
 
-    public double getGaji() {
-        return gaji;
-    }
-    
-    //polymorphism (overriding)
-    @Override
-    public void tampilInfo() {
-        super.tampilInfo();
-        System.out.println("Jenis Pegawai   : " + jenis);
-        System.out.println("Gaji            : Rp " + gaji);
-    }
-    
-    
 }
 
 
 public class MainKepegawaian {
     public static void main(String[] args) {
-        // IO sederhana
-        Scanner scanner = new Scanner(System.in);
-        
-        // array
-        PegawaiDetail[] listpegawai1 = new PegawaiDetail[2]; //lenght
-        
-        System.out.println("===== INPUT DATA PEGAWAI =====");
-        
-        // perulangan
-        for(int i = 0; i < listpegawai1.length; i++){
-            System.out.println("\nPegawai ke-" + (i + 1)); // 1., 2., dst...(jika length ingin ditambah)
-            
-            System.out.println("Nama Pegawai: ");
-            String nama = scanner.nextLine();
-            
-            System.out.println("NIP Pegawai: ");
-            String nip = scanner.nextLine();
-            
-            String jenis = "";
-            
-            // seleksi
-            while(true){
-                System.out.println("Jenis (Tetap/Kontrak): ");
-                jenis = scanner.nextLine();
-                // percabangan
-                if(jenis.equalsIgnoreCase("Tetap") || jenis.equalsIgnoreCase("Kontrak")){
-                    break;
-                } else{
-                    System.out.println("Input tidak valid!");
-                }
-            }
-            
-            double gaji = 0;
-            
-            while (true) {
-                try {
-                    System.out.print("Gaji: ");
-                    gaji = Double.parseDouble(scanner.nextLine());
-                    if (jenis.equalsIgnoreCase("Kontrak") && gaji > 3000000) {
-                        // Error Handling
-                        throw new Exception("Gaji pegawai Kontrak tidak boleh lebih dari 3.000.000!");
-                    }
-                    break;
-                } catch (NumberFormatException e){
-                    System.out.println("Kesalahan format nomor");
-                } catch (Exception e) {
-                    System.out.println("Error: " + e.getMessage());
-                }
-            }
-            // objek
-            listpegawai1[i] = new PegawaiDetail(nama, nip, jenis, gaji);
-        }
-        
-        // hasil akhir output
-        System.out.println("\n===== DATA PEGAWAI =====");
-        for(PegawaiDetail data : listpegawai1){
-            data.tampilInfo();
-            System.out.println("----------------------");
-        }
     }
 }
 
